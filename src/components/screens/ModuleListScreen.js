@@ -8,17 +8,8 @@ export const ModuleListScreen = () => {
   let modules = initialModules;
   //State -----------------------
   //Handlers --------------------
-  const handleSelect = (module) => alert(`Item ${module.ModuleCode} selected`);
-  const handleDelete = (module) => {
-    console.log(module.ModuleCode);
-    modules = modules.filter((item) => {
-      if (item.ModuleID !== module.ModuleID) return true;
-      else return false;
-    });
-    console.log(
-      `After deleting ${module.ModuleCode}, the array modules has length ${modules.length}`
-    );
-  };
+  const handleDelete = (module) =>
+    (modules = modules.filter((item) => item.ModuleID !== module.ModuleID));
   //View ------------------------
   return (
     <Screen>

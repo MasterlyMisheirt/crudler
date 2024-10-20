@@ -7,7 +7,11 @@ export const Button = ({ label, icon, onClick, styleLabel, styleButton }) => {
   //View ------------------------
   return (
     <Pressable onPress={onClick} style={[styles.button, styleButton]}>
-      {icon ? icon : console.log("No icon is present")}
+      {icon
+        ? icon
+        : console.log(
+            "No icon is present, try running the command 'npm install @expo/vector-icons' to fix the issue"
+          )}
       <Text style={[styles.label, styleLabel]}>{label}</Text>
     </Pressable>
   );

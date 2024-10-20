@@ -5,16 +5,24 @@ import ModuleItem from "../Entity/Modules/ModuleItem.js";
 
 export const ModuleListScreen = () => {
   //Initialisations -------------
-  const modules = initialModules;
+  let modules = initialModules;
   //State -----------------------
   //Handlers --------------------
-  const handleSelect = () => alert("Item selected");
+  const handleDelete = (module) => {
+    modules = modules.filter((item) => {
+      if (item.ModuleID !== module.ModuleID) return true;
+      else return false;
+    });
+    console.log(
+      `After deleting ${module.ModuleCode}, the array modules has length ${modules.length}`
+    );
+  };
   //View ------------------------
   return (
     <Screen>
       <ScrollView style={styles.container}>
         {modules.map((module) => {
-          return <ModuleItem module={module} onSelect={handleSelect} />;
+          return <ModuleItem module={module} onSelect={handleDelete} />;
         })}
       </ScrollView>
     </Screen>

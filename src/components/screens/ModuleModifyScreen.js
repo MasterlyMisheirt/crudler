@@ -1,5 +1,5 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text } from "react-native";
+import Screen from "../layout/Screen";
 
 export const ModuleModifyScreen = () => {
   //Initialisations -------------
@@ -7,20 +7,12 @@ export const ModuleModifyScreen = () => {
   //Handlers --------------------
   //View ------------------------
   return (
-    <View style={styles.container}>
-      <Text>Sigma Rizzlerssssssss</Text>
-      <StatusBar style="light" />
-    </View>
+    <Screen>
+      <Text>Modify Modules</Text>
+    </Screen>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
+const styles = StyleSheet.create({});
 
 export default ModuleModifyScreen;

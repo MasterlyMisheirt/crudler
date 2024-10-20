@@ -7,6 +7,7 @@ export const ModuleModifyScreen = () => {
   //Handlers --------------------
   //View ------------------------
   return (
+    
     <Screen>
       <Text>Modify Modules</Text>
     </Screen>

@@ -7,6 +7,7 @@ export const ModuleListScreen = () => {
   //Handlers --------------------
   //View ------------------------
   return (
+    
     <Screen>
       <Text>List Modules</Text>
     </Screen>

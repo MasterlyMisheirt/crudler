@@ -1,15 +1,16 @@
-import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import { useState } from "react";
+import { StyleSheet } from "react-native";
 import Screen from "../layout/Screen";
 import initialModules from "../../data/modules.js";
 import ModuleItem from "../Entity/Modules/ModuleItem.js";
 
 export const ModuleListScreen = () => {
   //Initialisations -------------
-  let modules = initialModules;
   //State -----------------------
+  const [modules, setModules] = useState(initialModules);
   //Handlers --------------------
   const handleDelete = (module) =>
-    (modules = modules.filter((item) => item.ModuleID !== module.ModuleID));
+    setModules(modules.filter((item) => item.ModuleID !== module.ModuleID));
   //View ------------------------
   return (
     <Screen>

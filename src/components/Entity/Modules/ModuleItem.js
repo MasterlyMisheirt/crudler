@@ -1,17 +1,23 @@
 import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
-const ModuleItem = ({ module, onSelect }) => {
+const ModuleItem = ({ modules, onSelect }) => {
   // Initialisations ---------------------
   // State -------------------------------
   // Handlers ----------------------------
   // View --------------------------------
   return (
-    <Pressable key={module.ModuleID} onPress={onSelect}>
-      <View style={styles.item}>
-        <Text style={styles.text}>
-          {module.ModuleCode} {module.ModuleName}
-        </Text>
-      </View>
-    </Pressable>
+    <View>
+      {modules.map((module) => {
+        return (
+          <Pressable onPress={onSelect} key={module.ModuleID}>
+            <View style={styles.item}>
+              <Text style={styles.text}>
+                {module.ModuleCode} {module.ModuleName}
+              </Text>
+            </View>
+          </Pressable>
+        );
+      })}
+    </View>
   );
 };
 const styles = StyleSheet.create({

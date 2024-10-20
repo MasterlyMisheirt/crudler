@@ -9,6 +9,7 @@ export const ModuleListScreen = () => {
   //State -----------------------
   //Handlers --------------------
   const handleDelete = (module) => {
+    console.log(module.ModuleCode);
     modules = modules.filter((item) => {
       if (item.ModuleID !== module.ModuleID) return true;
       else return false;
@@ -20,11 +21,7 @@ export const ModuleListScreen = () => {
   //View ------------------------
   return (
     <Screen>
-      <ScrollView style={styles.container}>
-        {modules.map((module) => {
-          return <ModuleItem module={module} onSelect={handleDelete} />;
-        })}
-      </ScrollView>
+      <ModuleItem modules={modules} onSelect={handleDelete} />
     </Screen>
   );
 };

@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, ScrollView, View } from "react-native";
 
 export const Screen = ({ children }) => {
   //Initialisations -------------
@@ -7,10 +7,12 @@ export const Screen = ({ children }) => {
   //Handlers --------------------
   //View ------------------------
   return (
-    <View style={styles.screen}>
-      {children}
-      <StatusBar style="light" />
-    </View>
+    <ScrollView style={styles.container}>
+      <View style={styles.screen}>
+        {children}
+        <StatusBar style="light" />
+      </View>
+    </ScrollView>
   );
 };
 

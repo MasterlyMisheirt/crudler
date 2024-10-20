@@ -8,6 +8,7 @@ export const ModuleListScreen = () => {
   let modules = initialModules;
   //State -----------------------
   //Handlers --------------------
+  const handleSelect = (module) => alert(`Item ${module.ModuleCode} selected`);
   const handleDelete = (module) => {
     console.log(module.ModuleCode);
     modules = modules.filter((item) => {

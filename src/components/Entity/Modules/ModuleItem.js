@@ -8,7 +8,7 @@ const ModuleItem = ({ modules, onSelect }) => {
     <View>
       {modules.map((module) => {
         return (
-          <Pressable onPress={onSelect} key={module.ModuleID}>
+          <Pressable onPress={() => onSelect(module)} key={module.ModuleID}>
             <View style={styles.item}>
               <Text style={styles.text}>
                 {module.ModuleCode} {module.ModuleName}

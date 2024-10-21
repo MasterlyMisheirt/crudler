@@ -14,25 +14,32 @@ export const ModuleListScreen = ({ navigation }) => {
   //State -----------------------
   const [modules, setModules] = useState(initialModules);
   //Handlers --------------------
-  const handleDelete = (module) => {
+  const handleDelete = (module) =>
     setModules(modules.filter((item) => item.ModuleID !== module.ModuleID));
-    console.log(`Module ${module.ModuleCode} deleted`);
-  };
+
+  const handleAdd = (module) => setModules([...modules, module]);
 
   const onDelete = (module) => {
     handleDelete(module);
     navigation.goBack();
   };
 
-  const handleSelect = (module) =>
+  const onAdd = (module) => {
+    handleAdd(module);
+    navigation.goBack();
+  };
+
+  const goToViewScreen = (module) =>
     navigation.navigate("ModuleViewScreen", { module, onDelete });
+
+  const goToAddScreen = () => navigation.navigate("ModuleAddScreen", { onAdd });
   //View ------------------------
   return (
     <Screen>
       <ButtonTray>
-        <Button label="Add" icon={<Icons.Add />} />
+        <Button label="Add" icon={<Icons.Add />} onClick={goToAddScreen} />
       </ButtonTray>
-      <ModuleItem modules={modules} onSelect={handleSelect} />
+      <ModuleItem modules={modules} onSelect={goToViewScreen} />
     </Screen>
   );
 };

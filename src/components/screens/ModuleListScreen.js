@@ -3,6 +3,8 @@ import { LogBox, StyleSheet } from "react-native";
 import Screen from "../layout/Screen";
 import initialModules from "../../data/modules.js";
 import ModuleItem from "../Entity/Modules/ModuleItem.js";
+import { Button, ButtonTray } from "../UI/Button.js";
+import Icons from "../UI/Icons.js";
 
 export const ModuleListScreen = ({ navigation }) => {
   //Initialisations -------------
@@ -27,6 +29,9 @@ export const ModuleListScreen = ({ navigation }) => {
   //View ------------------------
   return (
     <Screen>
+      <ButtonTray>
+        <Button label="Add" icon={<Icons.Add />} />
+      </ButtonTray>
       <ModuleItem modules={modules} onSelect={handleSelect} />
     </Screen>
   );

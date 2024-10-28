@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { StyleSheet, Text, TextInput, View } from "react-native";
-import { Button, ButtonTray } from "../../UI/Button.js";
 import Icons from "../../UI/Icons.js";
+import Form from "../../UI/Form.js";
 
 const defaultModule = {
   ModuleID: null, //Math.floor(100000 + Math.random() * 900000),
@@ -28,76 +28,42 @@ const ModuleForm = ({ onSubmit, onCancel }) => {
   const handleSubmit = () => onSubmit(module);
 
   // View --------------------------------
-  const submit = "Add";
+  const submitLabel = "Add";
   const submitIcon = <Icons.Add />;
   return (
-    <View style={styles.formContainer}>
-      <View style={styles.item}>
-        <Text style={styles.itemLabel}>Module Code</Text>
-        <TextInput
-          value={module.ModuleCode}
-          onChangeText={(value) => handleChange("ModuleCode", value)}
-          style={styles.itemTextInput}
-        />
-      </View>
-
-      <View style={styles.item}>
-        <Text style={styles.itemLabel}>Module Name</Text>
-        <TextInput
-          value={module.ModuleName}
-          onChangeText={(value) => handleChange("ModuleName", value)}
-          style={styles.itemTextInput}
-        />
-      </View>
-
-      <View style={styles.item}>
-        <Text style={styles.itemLabel}>Module Level</Text>
-        <TextInput
-          value={module.ModuleLevel}
-          onChangeText={(value) => handleChange("ModuleLevel", value)}
-          style={styles.itemTextInput}
-        />
-      </View>
-
-      <View style={styles.item}>
-        <Text style={styles.itemLabel}>Module Leader</Text>
-        <TextInput
-          value={module.ModuleLeader}
-          onChangeText={(value) => handleChange("ModuleLeaderName", value)}
-          style={styles.itemTextInput}
-        />
-      </View>
-
-      <View style={styles.item}>
-        <Text style={styles.itemLabel}>Module image URL</Text>
-        <TextInput
-          value={module.ModuleImage}
-          onChangeText={(value) => handleChange("ModuleImage", value)}
-          style={styles.itemTextInput}
-        />
-      </View>
-
-      <ButtonTray>
-        <Button label={submit} icon={submitIcon} onClick={handleSubmit} />
-        <Button label="Cancel" icon={<Icons.Cancel />} onClick={onCancel} />
-      </ButtonTray>
-    </View>
+    <Form
+      onSubmit={handleSubmit}
+      onCancel={onCancel}
+      submitLabel={submitLabel}
+      submitIcon={submitIcon}
+    >
+      <Form.InputText
+        label="Module Code"
+        value={module.ModuleCode}
+        onChange={(value) => handleChange("ModuleCode", value)}
+      />
+      <Form.InputText
+        label="Module Name"
+        value={module.ModuleName}
+        onChange={(value) => handleChange("ModuleName", value)}
+      />
+      <Form.InputText
+        label="Modul Level"
+        value={module.ModuleLevel}
+        onChange={(value) => handleChange("ModuleLevel", value)}
+      />
+      <Form.InputText
+        label="Module Leader"
+        value={module.ModuleLeaderName}
+        onChange={(value) => handleChange("ModuleLeaderName", value)}
+      />
+      <Form.InputText
+        label="Module Image URL"
+        value={module.ModuleImage}
+        onChange={(value) => handleChange("ModuleImage", value)}
+      />
+    </Form>
   );
 };
-const styles = StyleSheet.create({
-  itemLabel: {
-    color: "grey",
-    fontSize: 16,
-    marginBottom: 5,
-  },
-  itemTextInput: {
-    height: 50,
-    paddingLeft: 10,
-    fontSize: 16,
-    backgroundColor: "white",
-    borderRadius: 7,
-    borderWidth: 1,
-    borderColor: "lightgray",
-  },
-});
+const styles = StyleSheet.create({});
 export default ModuleForm;

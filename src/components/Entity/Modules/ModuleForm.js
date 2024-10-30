@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { StyleSheet, Text, TextInput, View } from "react-native";
+import useLoad from "../../API/UseLoad.js";
 import Icons from "../../UI/Icons.js";
 import Form from "../../UI/Form.js";
 
@@ -8,8 +9,8 @@ const defaultModule = {
   ModuleName: null,
   ModuleCode: null,
   ModuleLevel: null,
+  ModuleYearID: null,
   ModuleLeaderID: null,
-  ModuleLeaderName: null,
   ModuleImageURL: null,
 };
 
@@ -18,6 +19,9 @@ const ModuleForm = ({ ogModule, onSubmit, onCancel }) => {
   defaultModule.ModuleID = Math.floor(100000 + Math.random() * 900000);
   defaultModule.ModuleImage =
     "https://images.freeimages.com/images/small-previews/411/light-of-technology-1510575.jpg";
+
+  const yearsEndPoint = "https://softwarehub.uk/unibase/api/years";
+  const leadersEndPoint = "https://softwarehub.uk/unibase/api/users/staff";
 
   const levels = [
     { value: 3, label: "3 (Foundation)" },
@@ -29,6 +33,8 @@ const ModuleForm = ({ ogModule, onSubmit, onCancel }) => {
 
   // State -------------------------------
   const [module, setModule] = useState(ogModule || defaultModule);
+  const [years, isYearsLoading, yearsLoading] = useLoad(yearsEndPoint);
+  const [leaders, isLeadersLoading, leadersLoading] = useLoad(leadersEndPoint);
 
   // Handlers ----------------------------
   const handleChange = (field, value) =>
@@ -38,6 +44,17 @@ const ModuleForm = ({ ogModule, onSubmit, onCancel }) => {
   // View --------------------------------
   const submitLabel = ogModule ? "Modify" : "Add";
   const submitIcon = ogModule ? <Icons.Edit /> : <Icons.Add />;
+
+  const cohorts = years.map((year) => ({
+    value: year.YearID,
+    label: year.YearName,
+  }));
+
+  const staff = leaders.map((leader) => ({
+    value: leader.UserID,
+    label: `${leader.UserFirstname} ${leader.UserLastname}`,
+  }));
+
   return (
     <Form
       onSubmit={handleSubmit}
@@ -62,10 +79,22 @@ const ModuleForm = ({ ogModule, onSubmit, onCancel }) => {
         value={module.ModuleLevel}
         onChange={(value) => handleChange("ModuleLevel", value)}
       />
-      <Form.InputText
+
+      <Form.InputSelect
+        label="Module Cohort"
+        prompt="Select Module Cohort..."
+        options={cohorts}
+        value={module.ModuleYearID}
+        onChange={(value) => handleChange("ModuleYearID", value)}
+        isLoading={isYearsLoading}
+      />
+      <Form.InputSelect
         label="Module Leader"
-        value={module.ModuleLeaderName}
-        onChange={(value) => handleChange("ModuleLeaderName", value)}
+        prompt="Select Module Leader..."
+        options={staff}
+        value={module.ModuleLeaderID}
+        onChange={(value) => handleChange("ModuleLeaderID", value)}
+        isLoading={isLeadersLoading}
       />
       <Form.InputText
         label="Module Image URL"

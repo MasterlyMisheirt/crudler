@@ -45,7 +45,14 @@ const InputText = ({ label, value, onChange }) => {
   );
 };
 
-const InputSelect = ({ label, prompt, options, value, onChange }) => {
+const InputSelect = ({
+  label,
+  prompt,
+  options,
+  value,
+  onChange,
+  isLoading,
+}) => {
   // Initialisations ---------------------
   // State -------------------------------
   // Handlers ----------------------------
@@ -61,7 +68,7 @@ const InputSelect = ({ label, prompt, options, value, onChange }) => {
       >
         <Picker.Item
           value={null}
-          label={prompt}
+          label={isLoading ? "Loading prompt options..." : prompt}
           style={styles.itemPickerPromptStyle}
         />
         {options.map((option, index) => (

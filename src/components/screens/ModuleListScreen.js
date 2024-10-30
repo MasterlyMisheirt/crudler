@@ -1,5 +1,6 @@
-import { LogBox, StyleSheet, Text } from "react-native";
+import { Alert, LogBox, StyleSheet, Text } from "react-native";
 import useLoad from "../API/UseLoad.js";
+import API from "../API/API.js";
 import Screen from "../layout/Screen";
 import ModuleItem from "../Entity/Modules/ModuleItem.js";
 import { Button, ButtonTray } from "../UI/Button.js";
@@ -13,35 +14,34 @@ export const ModuleListScreen = ({ navigation }) => {
   const modulesEndPoint = "https://softwarehub.uk/unibase/api/modules";
 
   //State -----------------------
-  const [modules, setModules, isLoading, loadModules] =
+  const [modules, setRecords, isLoading, loadModules] =
     useLoad(modulesEndPoint);
 
   //Handlers --------------------
-  const handleDelete = (module) =>
-    setModules(modules.filter((item) => item.ModuleID !== module.ModuleID));
-
-  const handleAdd = (module) => setModules([...modules, module]);
-
-  const handleModify = (updatedModule) =>
-    setModules(
-      modules.map((module) =>
-        module.ModuleID === updatedModule.ModuleID ? updatedModule : module
-      )
-    );
-
-  const onDelete = (module) => {
-    handleDelete(module);
-    navigation.goBack();
+  const onDelete = async (module) => {
+    const deleteEndPoint = `${modulesEndPoint}/${module.ModuleID}`;
+    const result = await API.delete(deleteEndPoint, module);
+    if (result.isSuccess) {
+      loadModules(modulesEndPoint);
+      navigation.goBack();
+    } else Alert.alert(result.message);
   };
 
-  const onAdd = (module) => {
-    handleAdd(module);
-    navigation.goBack();
+  const onAdd = async (module) => {
+    const result = await API.post(modulesEndPoint, module);
+    if (result.isSuccess) {
+      loadModules(modulesEndPoint);
+      navigation.goBack();
+    } else Alert.alert(result.message);
   };
 
-  const onModify = (module) => {
-    handleModify(module);
-    navigation.navigate("ModuleListScreen");
+  const onModify = async (module) => {
+    const putEndPoint = `${modulesEndPoint}/${module.ModuleID}`;
+    const result = await API.put(putEndPoint, module);
+    if (result.isSuccess) {
+      loadModules(modulesEndPoint);
+      navigation.navigate("ModuleViewScreen", { module, onDelete, onModify });
+    } else Alert.alert(result.message);
   };
 
   const goToViewScreen = (module) =>

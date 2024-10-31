@@ -11,14 +11,13 @@ const defaultModule = {
   ModuleLevel: null,
   ModuleYearID: null,
   ModuleLeaderID: null,
-  ModuleImageURL: null,
+  ModuleImageURL:
+    "https://images.freeimages.com/images/small-previews/411/light-of-technology-1510575.jpg",
 };
 
 const ModuleForm = ({ ogModule, onSubmit, onCancel }) => {
   // Initialisations ---------------------
   defaultModule.ModuleID = Math.floor(100000 + Math.random() * 900000);
-  defaultModule.ModuleImage =
-    "https://images.freeimages.com/images/small-previews/411/light-of-technology-1510575.jpg";
 
   const yearsEndPoint = "https://softwarehub.uk/unibase/api/years";
   const leadersEndPoint = "https://softwarehub.uk/unibase/api/users/staff";
@@ -73,7 +72,7 @@ const ModuleForm = ({ ogModule, onSubmit, onCancel }) => {
         onChange={(value) => handleChange("ModuleName", value)}
       />
       <Form.InputSelect
-        label="Modul Level"
+        label="Module Level"
         prompt="Select Module Level..."
         options={levels}
         value={module.ModuleLevel}

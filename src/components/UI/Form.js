@@ -51,7 +51,7 @@ const InputSelect = ({
   options,
   value,
   onChange,
-  isLoading,
+  isLoading = false,
 }) => {
   // Initialisations ---------------------
   // State -------------------------------
@@ -60,21 +60,31 @@ const InputSelect = ({
   return (
     <View style={styles.item}>
       <Text style={styles.itemLabel}>{label}</Text>
-      <Picker
-        mode="dropdown"
-        selectedValue={value}
-        onValueChange={onChange}
-        style={styles.itemPickerStyle}
-      >
-        <Picker.Item
-          value={null}
-          label={isLoading ? "Loading prompt options..." : prompt}
-          style={styles.itemPickerPromptStyle}
-        />
-        {options.map((option, index) => (
-          <Picker.Item key={index} value={option.value} label={option.label} />
-        ))}
-      </Picker>
+      {isLoading ? (
+        <View style={styles.itemLoading}>
+          <Text style={styles.itemLoadingText}>Loading prompt options ...</Text>
+        </View>
+      ) : (
+        <Picker
+          mode="dropdown"
+          selectedValue={value}
+          onValueChange={onChange}
+          style={styles.itemPickerStyle}
+        >
+          <Picker.Item
+            value={null}
+            label={prompt}
+            style={styles.itemPickerPromptStyle}
+          />
+          {options.map((option, index) => (
+            <Picker.Item
+              key={index}
+              value={option.value}
+              label={option.label}
+            />
+          ))}
+        </Picker>
+      )}
     </View>
   );
 };
@@ -96,6 +106,16 @@ const styles = StyleSheet.create({
     color: "grey",
     fontSize: 16,
     marginBottom: 5,
+  },
+  itemLoading: {
+    height: 50,
+    backgroundColor: "mistyrose",
+    justifyContent: "center",
+    paddingLeft: 10,
+  },
+  itemLoadingText: {
+    fontSize: 16,
+    color: "gray",
   },
   itemTextInput: {
     height: 50,

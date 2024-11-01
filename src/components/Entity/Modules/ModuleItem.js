@@ -5,14 +5,13 @@ const ModuleItem = ({ modules, onSelect }) => {
   // Initialisations ---------------------
   // State -------------------------------
   // Handlers ----------------------------
-  const handleSelect = () => onSelect(module);
   // View --------------------------------
   return (
     <View>
       {modules.map((module) => {
         return (
           <Selector
-            onPress={handleSelect}
+            onPress={() => onSelect(module)}
             pressStyle={styles.pressedItem}
             key={module.ModuleID}
           >

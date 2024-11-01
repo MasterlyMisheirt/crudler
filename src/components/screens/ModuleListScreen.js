@@ -1,4 +1,11 @@
-import { Alert, LogBox, StyleSheet, Text } from "react-native";
+import {
+  ActivityIndicator,
+  Alert,
+  LogBox,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import useLoad from "../API/UseLoad.js";
 import API from "../API/API.js";
 import Screen from "../layout/Screen";
@@ -51,19 +58,36 @@ export const ModuleListScreen = ({ navigation }) => {
   //View ------------------------
   return (
     <Screen>
-      <ButtonTray>
-        <Button
-          label="Add Module"
-          icon={<Icons.Add />}
-          onClick={goToAddScreen}
-        />
-      </ButtonTray>
-      {isLoading && <Text>Loading records ...</Text>}
-      <ModuleItem modules={modules} onSelect={goToViewScreen} />
+      <View style={styles.container}>
+        <ButtonTray>
+          <Button
+            label="Add Module"
+            icon={<Icons.Add />}
+            onClick={goToAddScreen}
+          />
+        </ButtonTray>
+        {isLoading && (
+          <View style={styles.loading}>
+            <Text>Retrieving records from {modulesEndPoint} ...</Text>
+            <ActivityIndicator size="large" />
+          </View>
+        )}
+        <ModuleItem modules={modules} onSelect={goToViewScreen} />
+      </View>
     </Screen>
   );
 };
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    gap: 15,
+  },
+  loading: {
+    height: 100,
+    gap: 20,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});
 
 export default ModuleListScreen;

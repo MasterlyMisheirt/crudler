@@ -32,8 +32,8 @@ const ModuleForm = ({ ogModule, onSubmit, onCancel }) => {
 
   // State -------------------------------
   const [module, setModule] = useState(ogModule || defaultModule);
-  const [years, isYearsLoading, yearsLoading] = useLoad(yearsEndPoint);
-  const [leaders, isLeadersLoading, leadersLoading] = useLoad(leadersEndPoint);
+  const [years, , isYearsLoading] = useLoad(yearsEndPoint);
+  const [leaders, , isLeadersLoading] = useLoad(leadersEndPoint);
 
   // Handlers ----------------------------
   const handleChange = (field, value) =>

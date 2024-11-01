@@ -52,7 +52,11 @@ export const ModuleListScreen = ({ navigation }) => {
   return (
     <Screen>
       <ButtonTray>
-        <Button label="Add" icon={<Icons.Add />} onClick={goToAddScreen} />
+        <Button
+          label="Add Module"
+          icon={<Icons.Add />}
+          onClick={goToAddScreen}
+        />
       </ButtonTray>
       {isLoading && <Text>Loading records ...</Text>}
       <ModuleItem modules={modules} onSelect={goToViewScreen} />

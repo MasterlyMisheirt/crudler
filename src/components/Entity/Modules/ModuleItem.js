@@ -1,20 +1,27 @@
-import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
+import Selector from "../../UI/Selector";
+
 const ModuleItem = ({ modules, onSelect }) => {
   // Initialisations ---------------------
   // State -------------------------------
   // Handlers ----------------------------
+  const handleSelect = () => onSelect(module);
   // View --------------------------------
   return (
     <View>
       {modules.map((module) => {
         return (
-          <Pressable onPress={() => onSelect(module)} key={module.ModuleID}>
+          <Selector
+            onPress={handleSelect}
+            pressStyle={styles.pressedItem}
+            key={module.ModuleID}
+          >
             <View style={styles.item}>
               <Text style={styles.text}>
                 {module.ModuleCode} {module.ModuleName}
               </Text>
             </View>
-          </Pressable>
+          </Selector>
         );
       })}
     </View>
@@ -29,6 +36,9 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 16,
+  },
+  pressedItem: {
+    backgroundColor: "azure",
   },
 });
 export default ModuleItem;
